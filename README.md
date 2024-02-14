@@ -1,0 +1,2 @@
+# BUDGIE
+Simple budgeting app
