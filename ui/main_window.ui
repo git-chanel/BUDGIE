@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
-    <height>465</height>
+    <width>956</width>
+    <height>540</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -26,29 +26,55 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>321</width>
-      <height>321</height>
+      <x>9</x>
+      <y>9</y>
+      <width>314</width>
+      <height>240</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="100,100,100,100">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="100,0,0">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
      </property>
      <item>
-      <widget class="QCalendarWidget" name="calendarWidget"/>
+      <widget class="QCalendarWidget" name="calendarWidget">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
-     <item>
-      <widget class="QTimeEdit" name="timeEdit"/>
+     <item alignment="Qt::AlignHCenter">
+      <widget class="QDoubleSpinBox" name="currencyInput">
+       <property name="minimumSize">
+        <size>
+         <width>64</width>
+         <height>0</height>
+        </size>
+       </property>
+       <property name="buttonSymbols">
+        <enum>QAbstractSpinBox::PlusMinus</enum>
+       </property>
+       <property name="specialValueText">
+        <string/>
+       </property>
+       <property name="correctionMode">
+        <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+       </property>
+       <property name="suffix">
+        <string>$</string>
+       </property>
+       <property name="maximum">
+        <double>9999999.000000000000000</double>
+       </property>
+      </widget>
      </item>
-     <item>
-      <widget class="QSpinBox" name="spinBox"/>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
+     <item alignment="Qt::AlignHCenter">
+      <widget class="QPushButton" name="submitButton">
        <property name="text">
-        <string>PushButton</string>
+        <string>Submit</string>
        </property>
       </widget>
      </item>
@@ -60,12 +86,24 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>681</width>
+     <width>956</width>
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuProgram">
+    <property name="title">
+     <string>About</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuProgram"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
