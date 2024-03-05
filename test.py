@@ -23,30 +23,46 @@ def store_data_csv(csv_file_name, data):
       writer.writerow(['Amount','Date'])
       for row in data:
         writer.writerow(row)
+        
 
 # Appends/adds user input data into CSV
 def add_data_csv(csv_file_name, amount, date):
   with open(csv_file_path, mode='a', newline='') as file:
     writer = csv.writer(file)
     writer.writerow([amount, date])
-
+   
 # Ask for input from the user
 def get_user_input():
-  amount = int(input("Deposit Amount: "))
+  amount = str(input("Deposit Amount: "))
   date = str(input("Enter date (DD-MM-YYYY): "))
 
   return amount, date
 
 # Create the csv with its columns
 store_data_csv(csv_file_name, [])
-
 # Ask user for input
 amount, date = get_user_input()
-print(amount, date)
+#print(amount, date)
 # Add user input to CSV file
 add_data_csv(csv_file_name, amount, date)
-# Read data from CSV
 
+
+# Read data from CSV
+def read_data_csv(csv_file_name):
+  deposit = {}
+  with open(csv_file_path, mode='r', newline='') as file:
+    # Reads CSV as a dictionary where keys are dates amd values are amount
+    reader = csv.DictReader(file)
+    for row in reader:
+      print(row)
+      # Pass not the variables, but the name of the columns prewritten in data.csv
+      key = (row['Date'])
+      value = row['Amount']
+      deposit[key] = value
+  return deposit
+
+deposit = read_data_csv(csv_file_name)
+print(deposit)
 
 # Open and create csv file
 # Write into csv file and autosaves in file
@@ -61,3 +77,5 @@ add_data_csv(csv_file_name, amount, date)
 #so it would look like:
 #32.0, 26-02-2024 
   
+# Make a function to read the data.csv and make it return a dictionary, str date as a key
+# and amount as value
