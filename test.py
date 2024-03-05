@@ -36,7 +36,8 @@ def get_user_input():
   return amount, date
 
 # Create the csv with its columns
-store_data_csv(csv_file_name, [])
+if not os.path.exists(csv_file_name):
+  store_data_csv(csv_file_name, [])
 # Ask user for input
 amount, date = get_user_input()
 print(amount, date)
