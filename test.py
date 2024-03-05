@@ -10,19 +10,59 @@ csv_file_name = 'data.csv'
 csv_file_path = os.path.join(current_dir, csv_file_name)
 
 print (csv_file_path)
+
+# Open CSV file for writing 
+def store_data_csv(csv_file_name, data):
+  # Check if file exists
+  if not os.path.exists(csv_file_name):
+    # Open CSV file in write mode
+    with open(csv_file_name, mode='w',newline='') as file:
+    # Create a CSV writer object
+      writer = csv.writer(file)
+    # Write the data to the CSV file
+      writer.writerow(['Amount','Date'])
+      for row in data:
+        writer.writerow(row)
+        
+
+# Appends/adds user input data into CSV
+def add_data_csv(csv_file_name, amount, date):
+  with open(csv_file_path, mode='a', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow([amount, date])
+   
 # Ask for input from the user
-amount = int(input("Deposit Amount: "))
-print(amount)
+def get_user_input():
+  amount = str(input("Deposit Amount: "))
+  date = str(input("Enter date (DD-MM-YYYY): "))
+
+  return amount, date
+
+# Create the csv with its columns
+store_data_csv(csv_file_name, [])
+# Ask user for input
+amount, date = get_user_input()
+#print(amount, date)
+# Add user input to CSV file
+add_data_csv(csv_file_name, amount, date)
 
 
-# Open CSV file in write mode
-with open(csv_file_path, mode='w',newline='') as file:
-  # Create a CSV writer object
-  writer = csv.writer(file)
+# Read data from CSV
+def read_data_csv(csv_file_name):
+  deposit = {}
+  with open(csv_file_path, mode='r', newline='') as file:
+    # Reads CSV as a dictionary where keys are dates amd values are amount
+    reader = csv.DictReader(file)
+    for row in reader:
+      print(row)
+      # Pass not the variables, but the name of the columns prewritten in data.csv
+      key = (row['Date'])
+      value = row['Amount']
+      deposit[key] = value
+  return deposit
 
-  # Write the data to the CSV file
-  writer.writerow([amount])
-
+deposit = read_data_csv(csv_file_name)
+print(deposit)
 
 # Open and create csv file
 # Write into csv file and autosaves in file
@@ -36,3 +76,6 @@ with open(csv_file_path, mode='w',newline='') as file:
 #<amount>|<date>
 #so it would look like:
 #32.0, 26-02-2024 
+  
+# Make a function to read the data.csv and make it return a dictionary, str date as a key
+# and amount as value
