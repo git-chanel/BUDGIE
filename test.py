@@ -13,14 +13,16 @@ print (csv_file_path)
 
 # Open CSV file for writing 
 def store_data_csv(csv_file_name, data):
-# Open CSV file in write mode
-  with open(csv_file_name, mode='w',newline='') as file:
-  # Create a CSV writer object
-    writer = csv.writer(file)
-  # Write the data to the CSV file
-    writer.writerow(['Amount','Date'])
-    for row in data:
-      writer.writerow(row)
+  # Check if file exists
+  if not os.path.exists(csv_file_name):
+    # Open CSV file in write mode
+    with open(csv_file_name, mode='w',newline='') as file:
+    # Create a CSV writer object
+      writer = csv.writer(file)
+    # Write the data to the CSV file
+      writer.writerow(['Amount','Date'])
+      for row in data:
+        writer.writerow(row)
 
 # Appends/adds user input data into CSV
 def add_data_csv(csv_file_name, amount, date):
@@ -36,8 +38,8 @@ def get_user_input():
   return amount, date
 
 # Create the csv with its columns
-if not os.path.exists(csv_file_name):
-  store_data_csv(csv_file_name, [])
+store_data_csv(csv_file_name, [])
+
 # Ask user for input
 amount, date = get_user_input()
 print(amount, date)
