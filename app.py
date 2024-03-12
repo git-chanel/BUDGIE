@@ -16,7 +16,9 @@ class Window(QMainWindow, Ui_MainWindow):
     def connectSignalsSlots(self):
         self.actionQuit.triggered.connect(self.close)
         # There was actionAbout 1, but I deleted it, but it is still in the generated code.
-        self.actionAbout_2.triggered.connect(self.about)
+        #self.actionAbout_2.triggered.connect(self.about)
+        #testing dialog
+        self.actionAbout_2.triggered.connect(self.dialog)
 
     def about(self):
         QMessageBox.about(
@@ -32,12 +34,13 @@ class Window(QMainWindow, Ui_MainWindow):
         )
 
     def dialog(self):
-        dialog = About(self)
+        dialog = Dialog(self)
+        # TODO: organize it so you can use these later, call and set them as needed.
+        dialog.headerText.setText("Title :)")
+        dialog.contentText.setText("Hi there!")
         dialog.exec()
-        
 
-
-class About(QDialog):
+class Dialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         loadUi("ui/dialog.ui", self)
@@ -46,5 +49,5 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     win = Window()
     win.show()
-    app.exec()
-    sys.exit()
+    exitCode = app.exec()
+    sys.exit(exitCode)

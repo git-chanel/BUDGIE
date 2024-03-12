@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>382</width>
-    <height>213</height>
+    <width>357</width>
+    <height>235</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
-     <widget class="QLabel" name="HeaderText">
+     <widget class="QLabel" name="headerText">
       <property name="font">
        <font>
         <pointsize>16</pointsize>
@@ -33,7 +33,7 @@
        <set>Qt::AlignCenter</set>
       </property>
      </widget>
-     <widget class="QLabel" name="ContentText">
+     <widget class="QLabel" name="contentText">
       <property name="text">
        <string>TextLabel</string>
       </property>
@@ -64,31 +64,31 @@
   <connection>
    <sender>buttonBox</sender>
    <signal>accepted()</signal>
-   <receiver>buttonBox</receiver>
-   <slot>close()</slot>
+   <receiver>Dialog</receiver>
+   <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>186</x>
-     <y>178</y>
+     <x>213</x>
+     <y>197</y>
     </hint>
     <hint type="destinationlabel">
-     <x>210</x>
-     <y>181</y>
+     <x>353</x>
+     <y>164</y>
     </hint>
    </hints>
   </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
-   <receiver>buttonBox</receiver>
-   <slot>close()</slot>
+   <receiver>Dialog</receiver>
+   <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>165</x>
-     <y>181</y>
+     <x>156</x>
+     <y>197</y>
     </hint>
     <hint type="destinationlabel">
-     <x>158</x>
+     <x>7</x>
      <y>183</y>
     </hint>
    </hints>
