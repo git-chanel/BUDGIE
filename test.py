@@ -62,12 +62,14 @@ def read_data_csv(csv_file_name):
   return deposit
 
 deposit = read_data_csv(csv_file_name)
-print(deposit)
+
+
+if __name__ == '__main__': 
+  print(deposit)
 
 # Open and create csv file
 # Write into csv file and autosaves in file
   
-
 # We want to store multiple numbers. How can we store it to make it easier
   #to retrieve later on. Build a table. 
 
