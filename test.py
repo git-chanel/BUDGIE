@@ -35,7 +35,7 @@ def get_user_input():
 # Read data from CSV
 def read_data_csv(csv_file_name):
   deposit = {}
-  with open(csv_file_path, mode='r', newline='') as file:
+  with open(csv_file_name, mode='r', newline='') as file:
     # Reads CSV as a dictionary where keys are dates amd values are amount
     reader = csv.DictReader(file)
     for row in reader:
@@ -59,14 +59,14 @@ if __name__ == '__main__':
   csv_file_path = os.path.join(current_dir, csv_file_name)
 
   # Create the csv with its columns
-  store_data_csv(csv_file_name, [])
+  store_data_csv(csv_file_path, [])
   # Ask user for input
   amount, date = get_user_input()
   #print(amount, date)
   # Add user input to CSV file
-  add_data_csv(csv_file_name, amount, date)
+  add_data_csv(csv_file_path, amount, date)
   print (csv_file_path)
-  deposit = read_data_csv(csv_file_name)
+  deposit = read_data_csv(csv_file_path)
   print(deposit)
 
 # Open and create csv file
