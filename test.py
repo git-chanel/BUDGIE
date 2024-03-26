@@ -39,11 +39,17 @@ def read_data_csv(csv_file_name):
     # Reads CSV as a dictionary where keys are dates amd values are amount
     reader = csv.DictReader(file)
     for row in reader:
-      print(row)
+      # Add userAmounts of the same dates
+      
+      
       # Pass not the variables, but the name of the columns prewritten in data.csv
       key = (row['Date'])
       value = row['Amount']
-      deposit[key] = value
+      if key in deposit:
+        deposit[key] = int(value) + int(deposit[key])
+      else:
+        deposit[key] = int(value)
+      print(row)
   return deposit
 
 
