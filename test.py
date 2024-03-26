@@ -1,15 +1,6 @@
 import os
 import csv 
 
-current_dir = os.path.dirname(__file__)
-
-# Name of the CSV file
-csv_file_name = 'data.csv'
-
-# Path to the CSV file
-csv_file_path = os.path.join(current_dir, csv_file_name)
-
-print (csv_file_path)
 
 # Open CSV file for writing 
 def store_data_csv(csv_file_name, data):
@@ -27,7 +18,7 @@ def store_data_csv(csv_file_name, data):
 
 # Appends/adds user input data into CSV
 def add_data_csv(csv_file_name, amount, date):
-  with open(csv_file_path, mode='a', newline='') as file:
+  with open(csv_file_name, mode='a', newline='') as file:
     writer = csv.writer(file)
     writer.writerow([amount, date])
    
@@ -38,13 +29,7 @@ def get_user_input():
 
   return amount, date
 
-# Create the csv with its columns
-store_data_csv(csv_file_name, [])
-# Ask user for input
-amount, date = get_user_input()
-#print(amount, date)
-# Add user input to CSV file
-add_data_csv(csv_file_name, amount, date)
+
 
 
 # Read data from CSV
@@ -61,10 +46,27 @@ def read_data_csv(csv_file_name):
       deposit[key] = value
   return deposit
 
-deposit = read_data_csv(csv_file_name)
+
 
 
 if __name__ == '__main__': 
+  current_dir = os.path.dirname(__file__)
+
+  # Name of the CSV file
+  csv_file_name = 'data.csv'
+
+  # Path to the CSV file
+  csv_file_path = os.path.join(current_dir, csv_file_name)
+
+  # Create the csv with its columns
+  store_data_csv(csv_file_name, [])
+  # Ask user for input
+  amount, date = get_user_input()
+  #print(amount, date)
+  # Add user input to CSV file
+  add_data_csv(csv_file_name, amount, date)
+  print (csv_file_path)
+  deposit = read_data_csv(csv_file_name)
   print(deposit)
 
 # Open and create csv file
@@ -81,3 +83,9 @@ if __name__ == '__main__':
   
 # Make a function to read the data.csv and make it return a dictionary, str date as a key
 # and amount as value
+
+# make the functions work properly with its parameters
+# and adjust all function calls and variables in main
+# so it can print and input just the way how it did before.
+  
+  # we are refactoring
