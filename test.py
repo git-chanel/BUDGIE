@@ -52,17 +52,18 @@ def read_data_csv(csv_file_name):
       print(row)
   return deposit
 
+# Get the file name and path
+def getDataFilePath():
+  # Hardcoded name of the CSV file
+  csv_file_name = 'data.csv'
 
-
+  # Path to the CSV file
+  return os.path.join(current_dir, csv_file_name)
 
 if __name__ == '__main__': 
   current_dir = os.path.dirname(__file__)
 
-  # Name of the CSV file
-  csv_file_name = 'data.csv'
-
-  # Path to the CSV file
-  csv_file_path = os.path.join(current_dir, csv_file_name)
+  csv_file_path = getDataFilePath()
 
   # Create the csv with its columns
   store_data_csv(csv_file_path, [])
