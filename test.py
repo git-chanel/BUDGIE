@@ -1,6 +1,6 @@
 import os
 import csv 
-
+from datetime import datetime
 
 # Open CSV file for writing 
 def store_data_csv(csv_file_name, data):
@@ -24,14 +24,35 @@ def add_data_csv(csv_file_name, amount, date):
    
 # Ask for input from the user
 def get_user_input():
-  amount = str(input("Deposit Amount: "))
-  date = str(input("Enter date (DD-MM-YYYY): "))
+  while True:
+    amount = str(input("Deposit Amount: "))
+    if validate_amount(amount):
+      break
+  while True:
+    date = str(input("Enter date (DD-MM-YYYY): "))
+    if validate_date(date):
+      break
 
   return amount, date
 
+def validate_amount(amount):
+  try: 
+      print(float(amount))
+      return True
+  except ValueError as e:
+      print("Incorrect input")
+      print(e)
+      return False
 
-
-
+def validate_date(date):
+  try:
+    date = datetime.strptime(date, "%d-%m-%Y")  
+    print(date)
+    return True
+  except ValueError as e:
+    print("Incorrect input")
+    return False
+  
 # Read data from CSV
 def read_data_csv(csv_file_name):
   deposit = {}
@@ -46,9 +67,9 @@ def read_data_csv(csv_file_name):
       key = (row['Date'])
       value = row['Amount']
       if key in deposit:
-        deposit[key] = int(value) + int(deposit[key])
+        deposit[key] = float(value) + float(deposit[key])
       else:
-        deposit[key] = int(value)
+        deposit[key] = float(value)
       print(row)
   return deposit
 
