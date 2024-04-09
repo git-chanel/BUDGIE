@@ -79,11 +79,11 @@ def getDataFilePath():
   csv_file_name = 'data.csv'
 
   # Path to the CSV file
+  current_dir = os.path.dirname(__file__)
+
   return os.path.join(current_dir, csv_file_name)
 
 if __name__ == '__main__': 
-  current_dir = os.path.dirname(__file__)
-
   csv_file_path = getDataFilePath()
 
   # Create the csv with its columns
