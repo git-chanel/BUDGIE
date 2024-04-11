@@ -41,7 +41,15 @@ Install all the packages:
 pip install -r requirements.txt
 ```
 
-TODO: Some note about how to run the program itself here.
+Run the cli with:
+```
+py test.py
+```
+
+Run the app GUI with:
+```
+py app.py
+```
 
 ## pyqt5 tools & designer
 
