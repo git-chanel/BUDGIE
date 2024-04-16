@@ -62,7 +62,6 @@ def read_data_csv(csv_file_name):
     for row in reader:
       # Add userAmounts of the same dates
       
-      
       # Pass not the variables, but the name of the columns prewritten in data.csv
       key = (row['Date'])
       value = row['Amount']
@@ -72,6 +71,15 @@ def read_data_csv(csv_file_name):
         deposit[key] = float(value)
       print(row)
   return deposit
+
+ #Sum of deposited
+
+
+def getSum(deposit):
+  #deposit is a dictionary from read_data_csv that looks like {date:amount, differentdate:amount, and so on}
+  total=sum(float(value) for value in deposit.values())
+  return total 
+
 
 # Get the file name and path
 def getDataFilePath():
@@ -90,30 +98,10 @@ if __name__ == '__main__':
   store_data_csv(csv_file_path, [])
   # Ask user for input
   amount, date = get_user_input()
-  #print(amount, date)
   # Add user input to CSV file
   add_data_csv(csv_file_path, amount, date)
   print (csv_file_path)
   deposit = read_data_csv(csv_file_path)
   print(deposit)
-
-# Open and create csv file
-# Write into csv file and autosaves in file
-  
-# We want to store multiple numbers. How can we store it to make it easier
-  #to retrieve later on. Build a table. 
-
-  # Store column wise, amount, date. 
-  #column 1 | column 2
-#<amount>|<date>
-#so it would look like:
-#32.0, 26-02-2024 
-  
-# Make a function to read the data.csv and make it return a dictionary, str date as a key
-# and amount as value
-
-# make the functions work properly with its parameters
-# and adjust all function calls and variables in main
-# so it can print and input just the way how it did before.
-  
-  # we are refactoring
+  total = getSum(deposit)
+  print('$'+str(total))
