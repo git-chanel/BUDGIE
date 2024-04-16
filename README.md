@@ -29,8 +29,10 @@ Windows/Powershell
 
 ```
 ./venv/scripts/activate
+```
 
-might need to do this on shift right click windows, admin powershell
+might need to do this: shift + right-click windows button, and select admin powershell.  
+```
 set-executionpolicy remotesigned
 Y
 ```
@@ -61,3 +63,9 @@ py -3.11 -m pip install pyqt5-tools
 ```
 
 Then in your `Python3.11/Scripts/` folder you can find and launch `pyqt5-tools.exe designer`, or `pyqt5-tools.exe --help` for more options.
+
+The .ui files are made with QtDesigner. pyqt5 should've been installed through the requirements.txt  
+When in the "./ui/" directory do the following to generate a new ui_main_window.py file.
+```
+pyuic5 -o .\ui_main_window.py .\main_window.ui
+```

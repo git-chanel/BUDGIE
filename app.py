@@ -1,8 +1,9 @@
 import sys
-from PyQt5.QtWidgets import ( QApplication, QDialog, QMainWindow, QMessageBox)
+from PyQt5.QtWidgets import ( QApplication, QDialog, QMainWindow, QMessageBox, QCalendarWidget)
 from PyQt5 import QtCore
 from PyQt5.uic import loadUi
 import pyqtgraph as pg
+from datetime import datetime
 import test
 
 # inside ui folder is the ui_main_window.py file, import the Ui_MainWindow class from that generated file.
@@ -22,9 +23,6 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def connectSignalsSlots(self):
         self.actionQuit.triggered.connect(self.close)
-        # There was actionAbout 1, but I deleted it, but it is still in the generated code.
-        #self.actionAbout_2.triggered.connect(self.about)
-        #testing dialog
         self.actionAbout_2.triggered.connect(self.dialog)
         # Connect the button to function. submitButton is a QtWidgets.QPushButton.
         self.submitButton.clicked.connect(self.submitClicked)
@@ -43,7 +41,7 @@ class Window(QMainWindow, Ui_MainWindow):
         amount = list(data.values())
         print(time)
         print(amount)
-        # TODO: figure out how to refresh graph fully, so the previous latest line doesn't persist.
+        # TODO: figure out how to refresh graph fully, so it doesn't act weird when inserting between exisitng or older dates 
         if initialize:
             self.line = self.graph.plot(time, amount)
         elif self.line:
@@ -93,8 +91,11 @@ class Window(QMainWindow, Ui_MainWindow):
             if not test.validate_amount(amount) or amount == 0:
                 raise ValueError(amount)
         except ValueError as e:
-            #TODO: raise an amount error dialog
-            print("Error: Cannot submit invalid amount:", e)
+            errorMessage = "Error: Cannot submit invalid amount: {}".format(e)
+            print(errorMessage)
+            dialog = Dialog(self)
+            dialog.setBody(errorMessage)
+            dialog.exec()
             return
 
         try:
@@ -102,8 +103,11 @@ class Window(QMainWindow, Ui_MainWindow):
             if not test.validate_date(date):
                 raise ValueError(date)
         except ValueError as e:
-            #TODO: raise a date error dialog
-            print("Error: Cannot submit invalid date:", e)
+            errorMessage = "Error: Cannot submit invalid date: {}".format(e)
+            print(errorMessage)
+            dialog = Dialog(self)
+            dialog.setBody(errorMessage)
+            dialog.exec()
             return
 
         test.add_data_csv(test.getDataFilePath(), amount, date)
@@ -116,12 +120,20 @@ class Window(QMainWindow, Ui_MainWindow):
 
     def reset(self):
         self.currencyInput.setValue(0)
-        #TODO: perhaps reset date to today, also have a "date today" button to reset it to current date.
 
 class Dialog(QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
         loadUi("ui/dialog.ui", self)
+        
+        # set a default header
+        self.setHeader("Error")
+
+    def setHeader(self, headerText):
+        self.headerText.setText(headerText)
+
+    def setBody(self, bodyText):
+        self.contentText.setText(bodyText)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
